@@ -11,6 +11,13 @@ Escriba el codigo que ejecute la accion solicitada en cada pregunta.
 # pylint: disable=import-outside-toplevel
 
 
+"""
+Escriba el codigo que ejecute la accion solicitada en cada pregunta.
+"""
+
+# pylint: disable=import-outside-toplevel
+
+
 def pregunta_01():
     """
     Construya y retorne un dataframe de Pandas a partir del archivo
@@ -42,7 +49,7 @@ def pregunta_01():
             fila_actual = {
                 "cluster": int(cluster),
                 "cantidad_de_palabras_clave": int(cantidad),
-                "porcentaje_de_palabras_clave": porcentaje.replace(",", ".") + " %",
+                "porcentaje_de_palabras_clave": float(porcentaje.replace(",", ".")),
                 "principales_palabras_clave": palabras.strip(),
             }
         elif (
@@ -59,9 +66,9 @@ def pregunta_01():
     df = pd.DataFrame(filas)
 
     col = df["principales_palabras_clave"]
-    col = col.str.replace(r"\s+", " ", regex=True)      # colapsa espacios multiples
+    col = col.str.replace(r"\s+", " ", regex=True)  # colapsa espacios multiples
     col = col.str.replace(r"\s*,\s*", ", ", regex=True)  # coma + un solo espacio
-    col = col.str.rstrip(".").str.strip()                # quita punto final sobrante
+    col = col.str.rstrip(".").str.strip()  # quita punto final sobrante
     df["principales_palabras_clave"] = col
 
     return df
